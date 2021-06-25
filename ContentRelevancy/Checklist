@@ -1,0 +1,5 @@
+1 - Figure out how to scrape each page and return a keyword count dictionary - Done!!!
+2 - Figure out how to compare the two dictionaries to create a score - In progress - Done!!!
+3 - Figure out how to take in a csv with link from/link to & create dicts & scores
+4 - Figure out how to spit out a new csv with updated scores
+5 - Make a pretty UI (will need to skip over to UI section on 100 days of code for this)
