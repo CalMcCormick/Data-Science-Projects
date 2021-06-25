@@ -2,21 +2,34 @@
 import pandas as pd
 from relevancycomparison import RelevancyScore
 
-link_to_url_1 = "https://www.comparethemarket.com/home-insurance/"
-link_from_url_1 = "https://www.lv.com/home-insurance"
-lv_to_ctm = RelevancyScore(link_to_url_1, link_from_url_1)
+home_insurance_links = pd.read_csv(r"c:\Users\calmc\OneDrive\Desktop\Portfolio Projects\Data Science Projects\ContentRelevancy\home_insurance_links.csv")
 
-print("\nLV TO CTM:")
-print(f"\nPercentage Keywords Hit: {lv_to_ctm.relevancy_percent}%")
-print(f"Relevancy Score (Weighted): {lv_to_ctm.relevancy_score}")
-print(f"Relevancy Multiplier: {lv_to_ctm.relevancy_multiplier}\n")
+links_from = home_insurance_links.LinkFrom
+
+links_to = home_insurance_links.LinkTo
 
 
-link_from_url_2 = "https://www.moneysupermarket.com/home-insurance/"
+relevency_figures = pd.DataFrame(columns=["LinkFrom", "LinkTo", "Relevency Percent", "Relevancy Score", "Relevancy Multiplier"])
 
-msm_to_ctm = RelevancyScore(link_to_url_1, link_from_url_2)
+for i in range(len(links_to)):
+    relevancy = RelevancyScore(links_from[i], links_to[i])
+    percent = relevancy.relevancy_percent
+    score = relevancy.relevancy_score
+    multiplier = relevancy.relevancy_multiplier
+    
+    relevency_figures = relevency_figures.append({"LinkFrom":links_from[i], "LinkTo":links_to[i], "Relevency Percent":percent, "Relevancy Score":score, "Relevancy Multiplier":multiplier}, ignore_index=True)
 
-print("\nMSM TO CTM:")
-print(f"\nPercentage Keywords Hit: {msm_to_ctm.relevancy_percent}%")
-print(f"Relevancy Score (Weighted): {msm_to_ctm.relevancy_score}")
-print(f"Relevancy Multiplier: {msm_to_ctm.relevancy_multiplier}\n")
+
+relevency_figures.to_csv('home_insurance_relevancies_2.csv', index=False)
+
+# print("\nLink 1:")
+# print(f"\nPercentage Keywords Hit: {link1.relevancy_percent}%")
+# print(f"Relevancy Score (Weighted): {link1.relevancy_score}")
+# print(f"Relevancy Multiplier: {link1.relevancy_multiplier}\n")
+
+
+# print("\nLink 2:")
+# print(f"\nPercentage Keywords Hit: {link2.relevancy_percent}%")
+# print(f"Relevancy Score (Weighted): {link2.relevancy_score}")
+# print(f"Relevancy Multiplier: {link2.relevancy_multiplier}\n")
+
