@@ -116,3 +116,6 @@ class SiteKeywordDict:
 
         return remove_1s(word_count_dict)
 
+url = "https://www.themoneypages.com/insurance/contents-insurance-spotlight-stay-home-order-fails-deter-burglars/"
+yeet = SiteKeywordDict(url)
+print(yeet.dictionary)
