@@ -10,7 +10,7 @@ class RelevancyScore():
         
         self.link_from = SiteKeywordDict(self.from_url)
         self.link_to = SiteKeywordDict(self.to_url)
-        self.target_keywords = len(self.link_to.dictionary)
+        self.target_keywords = len(self.link_to.dictionary) + 0.1
 
         self.up_to_five, self.up_to_ten, self.up_to_fifteen, self.up_to_twenty, self.more_than_twenty = self.get_counts()
         self.up_five_m, self.up_ten_m, self.up_fifteen_m, self.up_twenty_m, self.mt_twenty_m = self.get_weightings()
@@ -21,11 +21,11 @@ class RelevancyScore():
     def get_counts(self):
 
         # Counts of keyword mention frequency
-        up_to_five = 0
-        up_to_ten = 0
-        up_to_fifteen = 0
-        up_to_twenty = 0
-        more_than_twenty = 0 
+        up_to_five = 0.1
+        up_to_ten = 0.1
+        up_to_fifteen = 0.1
+        up_to_twenty = 0.1
+        more_than_twenty = 0.1
 
         # Simple for loop to do this
         for values in self.link_to.dictionary.values():
