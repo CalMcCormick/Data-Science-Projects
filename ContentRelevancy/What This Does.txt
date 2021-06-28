@@ -1,0 +1,15 @@
+CONTENT RELEVANCY PROJECT
+
+This script has been designed to determine the similarity (and therefore relevancy) between two links
+This is in an attempt to see how valuable the external links are that my client is receiving
+The script takes in 2 URL's and returns a percentage similarity, a relevancy score and a relevancy multiplier*
+ *the relvancy multiplier is being used because we just want to promote our existing metrics for the more relevant links
+
+Process:
+
+Scrape the site, use NLP preprocessing to standardise text, create a BoW dictionary
+Repeat this for the other site.
+
+Then the two BoW dictionaries get compared, using multipliers for the most used keywords.
+
+The main script allows for a CSV file to be used as an input, and a new CSV file to be created for the output.
