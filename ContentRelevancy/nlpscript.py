@@ -3,6 +3,7 @@
 import requests as req
 from bs4 import BeautifulSoup as bs
 import html5lib
+from fake_useragent import UserAgent
 # going to need to preprocess the crap out of the text
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -40,21 +41,28 @@ class SiteKeywordDict:
 
     def scrape_text(self):
 
-        url_text = req.get(self.url).text
-        soup = bs(url_text, 'html5lib')
-        # first extract all headers, just going to stick to H1's, H2's & H3's
-        h1s = soup.find_all("h1")
-        h2s = soup.find_all("h2")
-        h3s = soup.find_all("h3")
-        ps = soup.find_all("p")
-        all_tags = [h1s, h2s, h3s, ps]
+        try: 
+            ua = UserAgent()
+            header = {'User-Agent':str(ua.chrome)}
+            scrape = req.get(self.url, headers=header)
+            url_text = scrape.text
+            soup = bs(url_text, 'html5lib')
+            # first extract all headers, just going to stick to H1's, H2's & H3's
+            h1s = soup.find_all("h1")
+            h2s = soup.find_all("h2")
+            h3s = soup.find_all("h3")
+            ps = soup.find_all("p")
+            all_tags = [h1s, h2s, h3s, ps]
 
-        all_text = ""
-        for list in all_tags:
-            for tag in list:
-                all_text += tag.text.lower() + " "
+            all_text = ""
+            for list in all_tags:
+                for tag in list:
+                    all_text += tag.text.lower() + " "
 
-        return all_text
+            return all_text
+
+        except:
+            return 0
 
     def less_noise(self):
         # TOKENIZE
@@ -116,6 +124,9 @@ class SiteKeywordDict:
 
         return remove_1s(word_count_dict)
 
-url = "https://www.themoneypages.com/insurance/contents-insurance-spotlight-stay-home-order-fails-deter-burglars/"
-yeet = SiteKeywordDict(url)
-print(yeet.dictionary)
+    def accept_cookies(self):
+
+        pass
+
+
+
