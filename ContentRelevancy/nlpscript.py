@@ -124,9 +124,6 @@ class SiteKeywordDict:
 
         return remove_1s(word_count_dict)
 
-    def accept_cookies(self):
-
-        pass
 
 
 
